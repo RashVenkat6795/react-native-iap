@@ -85,6 +85,17 @@ export const subscriptionSk2Map = ({
     subscriptionPeriodNumberIOS: `${subscription?.subscriptionPeriod?.value}`,
     subscriptionPeriodUnitIOS:
       subscription?.subscriptionPeriod?.unit.toUpperCase() as SubscriptionIosPeriod,
+    introductoryPriceAsAmountIOS: subscription?.introductoryOffer?.displayPrice,
+    introductoryPricePaymentModeIOS:
+      subscription?.introductoryOffer?.paymentMode.toUpperCase() as
+        | ''
+        | 'FREETRIAL'
+        | 'PAYASYOUGO'
+        | 'PAYUPFRONT',
+    introductoryPriceNumberOfPeriodsIOS:
+      subscription?.introductoryOffer?.period?.value?.toString(),
+    introductoryPriceSubscriptionPeriodIOS: subscription?.introductoryOffer
+      ?.period?.unit as SubscriptionIosPeriod,
   };
   return prod;
 };
@@ -146,7 +157,7 @@ export const transactionSk2ToPurchaseMap = ({
   purchasedQuantity,
   originalID,
   verificationResult,
-  appAccountToken
+  appAccountToken,
 }: TransactionSk2): Purchase => {
   const purchase: Purchase = {
     productId: productID,
